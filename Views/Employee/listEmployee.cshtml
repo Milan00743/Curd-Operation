@@ -1,0 +1,107 @@
+﻿
+@model Curd_Operation.Models.Properties
+@{
+    ViewBag.Title = "Employee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="widget-box">
+    <div class="widget-title" style="padding-top:10px; padding-bottom:10px;">
+        <b>EMPLOYEE LIST </b>
+    </div>
+    <div class="widget-content nopadding table-responsive">
+        <table class="table table-bordered data-table">
+            <thead>
+                <tr>
+                    <th>Employee Code</th>
+                    <th>Employee Name</th>
+                    <th>Designation</th>
+                    <th>Remarks</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+               @if(Model.Listemployee!=null)
+               { 
+                foreach (var _itm in Model.Listemployee)
+                {
+                    <tr>
+                        <td>@_itm.empcode</td>
+                        <td>@_itm.empname</td>
+                        <td>@_itm.designation</td>
+                        <td>@_itm.description</td>
+                        <td>
+                            <div class="td-actions">
+                                <div style="padding-right:10px; width:70px">
+                                    <a href="@Url.Action("AddEmployee", "Employee", new { stringempid = @_itm.strempid })" class="btn btn-primary" style="background-color:green">
+                                        Edit
+                                    </a>
+                                </div>
+                                
+                                <button type="button" class="btn btn-danger btn-sm" onclick="DeleteWithConfirm('@_itm.strempid')">
+                                    <i></i>Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="text-right">
+            <a href="@Url.Action("AddEmployee", "Employee")" class="btn btn-primary">Add Employee</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function DeleteWithConfirm(id) {
+       
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this record!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it",
+            cancelButtonText: "No, cancel",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (isConfirm) {
+            
+            if (isConfirm) {
+                $.ajax({
+                    type: "POST",
+                    data: {
+                        stringempid : id
+                    },
+                    url: "../Employee/removeEmployee",
+                    success: function (data) {
+                        //$("#documents").html(data);
+                        swal({ title: "Done!", text: "Employee Removed successfully.", type: "success" },
+                            function () {
+                                //location.reload();
+                                window.location.href = window.location.href;
+                            })
+
+                    },
+
+                    error: function (result) {
+
+                    }
+                })
+            }
+            else {
+                swal("Cancelled", "Process has been cancelled :)", "error");
+            }
+        });
+    }
+</script>
+
+
+
+

@@ -1,0 +1,70 @@
+﻿@model Curd_Operation.Models.Properties
+@{
+    ViewBag.Title = "AddEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-12">
+    @if (@ViewBag.issucces == "1")
+    {
+        <div class="text-left" id="smessage">
+            <span class="alert alert-success alert-dismissible fade show" role="alert">
+                Saved Successfully!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </span>
+        </div>
+    }
+</div>
+<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+        <div class="card-body">
+            @using (Html.BeginForm("AddEmployee", "Employee", FormMethod.Post))
+            {
+
+                <div class="row gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <h6 class="mb-3 text-primary">Add Employee</h6>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label for="fullName">Employee Code</label>
+                            @Html.TextBoxFor(m => m.empcode, new { @class = "form-control", @placeholder = "EmpCode *", @required = "required" })
+                            @Html.HiddenFor(m => m.empid)
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label for="fullName">Employee Name</label>
+                            @Html.TextBoxFor(m => m.empname, new { @class = "form-control", @placeholder = "Employee Name *", @required = "required" })
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label for="fullName">Designation</label>
+                            @Html.TextBoxFor(m => m.designation, new { @class = "form-control", @placeholder = "designation" })
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label for="fullName">Remark</label>
+                            @Html.TextBoxFor(m => m.description, new { @class = "form-control", @placeholder = "Remark" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="text-right">
+
+                            <input type="submit" class="btn btn-primary" value="Save" />
+                            <a href="@Url.Action("listEmployee","Employee")" class="btn btn-secondary">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <section class="row" aria-labelledby="aspnetTitle">
+        <h1 id="title"> ASP.NET CRUD Operation Project</h1>
+        
+    </section>
+
+    <div class="row">
+        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
+            <a href="@Url.Action("AddEmployee", "Employee")" class="btn btn-primary">Add Employee</a>
+            <a href="@Url.Action("listEmployee", "Employee")" class="btn btn-primary" style=" background-color:green">Employee's List</a>
+
+
+        </section>
+    </div>
+</main>
